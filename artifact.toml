@@ -1,0 +1,30 @@
+kind = "web"
+previewPath = "/"
+title = "Flipwhis Clone"
+version = "1.0.0"
+id = "artifacts/flipwhis-clone"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24046
+
+[services.development]
+run = "pnpm --filter @workspace/flipwhis-clone run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/flipwhis-clone", "run", "build" ]
+publicDir = "artifacts/flipwhis-clone/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24046"
+BASE_PATH = "/"
